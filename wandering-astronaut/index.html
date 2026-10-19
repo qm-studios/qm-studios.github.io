@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wandering Astronaut · QM Studios</title>
+<meta name="description" content="A first-person narrative mystery. You wake up alone on a research ship built to be cheerful. The lights are out, and nobody is answering.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wandering Astronaut · QM Studios">
+<meta property="og:description" content="You wake up alone on a research ship built to be cheerful. The lights are out, and nobody is answering.">
+<meta property="og:image" content="https://qm-studios.github.io/assets/og.jpg">
+<meta property="og:url" content="https://qm-studios.github.io/wandering-astronaut/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#EDE5D3;--ink:#1A1C1E;--muted:#5A5650;--teal:#116B68;--teal-band:#1F8A87;--orange:#E2702A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;line-height:1.5}
+a{color:var(--teal)}a:hover{color:#0B4B49}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;padding-top:28px}
+header img{height:80px;width:auto;display:block}
+.mono{font-family:VT323,monospace;color:var(--teal)}
+header .mono{font-size:20px;letter-spacing:.5px}
+.bands{margin-top:14px}.bands .t{height:4px;background:var(--teal-band)}.bands .g{height:2px}.bands .o{height:7px;background:var(--orange)}
+h1{margin:40px 0 0;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(3rem,9vw,6.5rem);line-height:.95;letter-spacing:1px;text-transform:uppercase}
+.sub{margin-top:10px;font-size:1.5rem}
+.hook{margin:20px 0 0;max-width:760px;font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.35;font-weight:500;text-wrap:balance}
+figure{margin:0}
+.hero{position:relative;margin-top:32px;background:var(--ink)}
+.hero img{width:100%;height:auto;aspect-ratio:16/7;object-fit:cover;object-position:center 45%;display:block}
+.chip{position:absolute;left:14px;bottom:12px;padding:3px 10px;background:rgba(26,28,30,.82);color:var(--cream);font-family:VT323,monospace;font-size:18px}
+.label{margin:0;font-size:.8rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:32px;margin-top:48px;align-items:flex-start}
+.row>div{flex:1 1 380px;min-width:0}
+.premise p{margin:10px 0 0;font-size:1.125rem;line-height:1.6;max-width:560px;text-wrap:pretty}
+.pair{display:flex;gap:16px}
+.pair figure{flex:1 1 0;min-width:0}
+.pair img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;display:block}
+.pair figcaption{margin-top:6px;font-size:.875rem;color:var(--muted)}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:12px}
+.shots img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-top:56px;padding-top:24px;border-top:2px solid var(--ink)}
+.info ul{margin:12px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.info p{margin:12px 0 10px}
+.links{display:flex;flex-direction:column;gap:6px}
+footer{margin-top:56px;background:var(--ink);color:var(--cream)}
+footer .wrap{padding-top:20px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-family:VT323,monospace;font-size:18px}
+footer a{color:var(--cream)}
+@media (max-width:600px){.hero img{aspect-ratio:4/3}.chip{font-size:15px;left:10px;bottom:8px}header img{height:64px}}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+<a href="../"><img src="../assets/qm_logo.png" alt="QM Studios"></a>
+<div class="mono">QM STUDIOS · INDIA · ALPHA BUILD</div>
+</div>
+<div class="bands" aria-hidden="true"><div class="t"></div><div class="g"></div><div class="o"></div></div>
+</header>
+
+<main class="wrap">
+<h1>Wandering Astronaut</h1>
+<div class="mono sub">A first-person narrative mystery · Chapter 1: Awakening</div>
+<p class="hook">You wake up alone on a research ship built to be cheerful. The lights are out, and nobody is answering.</p>
+
+<figure class="hero">
+<img src="../assets/shot_corridor.jpg" alt="A red-lit corridor aboard the ship, with doors marked Storage and Cockpit">
+<figcaption class="chip">ALPHA BUILD · BEFORE THE ART PASS</figcaption>
+</figure>
+
+<div class="row">
+<div class="premise">
+<h2 class="label">The premise</h2>
+<p>An astronaut wakes in the medbay of FGRYYNE, a research vessel drifting through deep space, with no memory of how he got there. The crew is gone, the power is failing and the fuel is running low. To survive he has to keep the ship alive. To understand it, he has to answer one question: <b>who were these people?</b></p>
+</div>
+<div class="pair">
+<figure><img src="../assets/shot_past.jpg" alt="A bright cream console room with orange and teal trim"><figcaption>Built to feel like home</figcaption></figure>
+<figure><img src="../assets/shot_present.jpg" alt="The same room fading into emergency red light"><figcaption>Until the lights died</figcaption></figure>
+</div>
+</div>
+
+<h2 class="label" style="margin-top:56px">From the ship</h2>
+<div class="shots">
+<img src="../assets/shot_menu.jpg" alt="Main menu with the ship drifting through space">
+<img src="../assets/shot_flashlight.jpg" alt="A flashlight beam in a dark corridor during a power failure">
+<img src="../assets/shot_power.jpg" alt="The astronaut at a console as the ship's power comes back">
+</div>
+
+<div class="info">
+<div>
+<h2 class="label">Key features</h2>
+<ul>
+<li>First-person narrative mystery, told through logs, objects and empty rooms</li>
+<li>Tractor-beam asteroid mining to keep the ship fuelled</li>
+<li>Ship hazards, including a hull breach in total darkness</li>
+<li>Slow, suspenseful exploration: horror built on contrast, not jump scares</li>
+<li>Fully voiced by the developer</li>
+</ul>
+</div>
+<div>
+<h2 class="label">Platforms and plan</h2>
+<ul>
+<li>Chapter 1: Awakening as a free demo</li>
+<li>Full game on Steam (PC), targeting early 2027</li>
+<li>Chapter 1 playable end to end, after two alpha test rounds</li>
+<li>Testers' first read: "like Project Hail Mary"</li>
+</ul>
+</div>
+<div>
+<h2 class="label">Studio and contact</h2>
+<p>Built solo in Godot by Aadesh Malani, QM Studios, India.</p>
+<div class="links">
+<a href="mailto:aadeshmalani@gmail.com">aadeshmalani@gmail.com</a>
+<a href="https://instagram.com/qm_studios__">instagram.com/qm_studios__</a>
+<a href="https://thequantummenece.itch.io">thequantummenece.itch.io</a>
+</div>
+</div>
+</div>
+</main>
+
+<footer>
+<div class="wrap">
+<span>WANDERING ASTRONAUT · <a href="../">QM STUDIOS</a></span>
+<span>Screenshots: alpha build, before the art pass</span>
+</div>
+</footer>
+</body>
+</html>
