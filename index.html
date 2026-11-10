@@ -37,6 +37,13 @@ main{flex:1;max-width:880px;width:100%;margin:0 auto;padding:48px 24px}
 .about>div{flex:1 1 300px;min-width:0}
 .about p{margin:0 0 10px;font-size:1.0625rem}
 .about .hi{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:2rem;line-height:1;text-transform:uppercase}
+.news{display:flex;flex-direction:column;gap:16px}
+.news .item{display:flex;flex-wrap:wrap;gap:16px 20px;align-items:center;padding:16px;border:2px solid var(--ink);background:#F4EEE1}
+.news .item img{flex:1 1 220px;max-width:320px;min-width:0;width:100%;aspect-ratio:20/9;object-fit:cover;display:block}
+.news .item>div{flex:1 1 280px;min-width:0}
+.news .date{font-family:VT323,monospace;font-size:1.125rem;color:var(--teal)}
+.news h3{margin:2px 0 6px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.6rem;line-height:1.05;text-transform:uppercase}
+.news p{margin:0}
 footer{background:var(--ink);color:var(--cream);font-family:VT323,monospace;font-size:18px;text-align:center;padding:16px}
 </style>
 </head>
@@ -57,6 +64,32 @@ footer{background:var(--ink);color:var(--cream);font-family:VT323,monospace;font
 <span class="more">See the game →</span>
 </div>
 </a>
+
+<h2 class="label">Latest from the studio</h2>
+<div class="news">
+<div class="item">
+<img src="assets/ship_after.jpg" alt="The ship's exterior after the art pass, with panelled hull plating and a satellite dish">
+<div>
+<span class="date">NOV 2026</span>
+<h3>The art pass has started</h3>
+<p>The ship went from grey boxes to a panelled, worn-in hull. Interiors are next. <a href="wandering-astronaut/#art-pass">See the before and after →</a></p>
+</div>
+</div>
+<div class="item">
+<div>
+<span class="date">28 OCT 2026</span>
+<h3>Playable at IGDC 2026, Chennai</h3>
+<p>Wandering Astronaut's Chapter 1 demo was played by attendees at the India Game Developer Conference. Their verdicts, in one word each, are <a href="https://instagram.com/qm_studios__">on Instagram</a>.</p>
+</div>
+</div>
+<div class="item">
+<div>
+<span class="date">COMING SOON</span>
+<h3>Steam page</h3>
+<p>Wandering Astronaut is coming to Steam for PC. Chapter 1 will also be free on <a href="https://thequantummenece.itch.io">itch.io</a>.</p>
+</div>
+</div>
+</div>
 
 <h2 class="label">Who's behind QM Studios</h2>
 <div class="about">
