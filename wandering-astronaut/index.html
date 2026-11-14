@@ -57,6 +57,9 @@ figure{margin:0}
 footer{margin-top:56px;background:var(--ink);color:var(--cream)}
 footer .wrap{padding-top:20px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-family:VT323,monospace;font-size:18px}
 footer a{color:var(--cream)}
+.hero.video{background:#000}
+.hero video{width:100%;height:auto;aspect-ratio:1280/690;display:block;background:#000}
+.vcap{padding:10px 14px;background:var(--ink);color:var(--cream);font-size:.95rem}
 @media (max-width:600px){.hero img{aspect-ratio:4/3}.chip{font-size:15px;left:10px;bottom:8px}header img{height:64px}}
 </style>
 </head>
@@ -74,9 +77,12 @@ footer a{color:var(--cream)}
 <div class="mono sub">A first-person narrative mystery · Chapter 1: Awakening</div>
 <p class="hook">You wake up alone on a research ship built to be cheerful. The lights are out, and nobody is answering.</p>
 
-<figure class="hero">
-<img src="../assets/shot_corridor.jpg" alt="A red-lit corridor aboard the ship, with doors marked Storage and Cockpit">
-<figcaption class="chip">ALPHA BUILD · BEFORE THE ART PASS</figcaption>
+<figure class="hero video" id="opening">
+<video controls playsinline preload="metadata" poster="../assets/opening_poster.jpg">
+<source src="../media/opening_scene.mp4" type="video/mp4">
+Your browser can't play this video. <a href="../media/opening_scene.mp4">Download the opening scene</a>.
+</video>
+<figcaption class="vcap"><b>The opening of Chapter 1.</b> Captured in-game, sound on. The art pass is still in progress.</figcaption>
 </figure>
 
 <div class="row">
@@ -105,6 +111,7 @@ footer a{color:var(--cream)}
 <img src="../assets/shot_menu.jpg" alt="Main menu with the ship drifting through space">
 <img src="../assets/shot_flashlight.jpg" alt="A flashlight beam in a dark corridor during a power failure">
 <img src="../assets/shot_power.jpg" alt="The astronaut at a console as the ship's power comes back">
+<img src="../assets/shot_corridor.jpg" alt="A red-lit corridor aboard the ship, with doors marked Storage and Cockpit">
 </div>
 
 <div class="info">
