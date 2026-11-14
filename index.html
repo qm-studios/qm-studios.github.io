@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>QM Studios · Playfully menacing</title>
 <meta name="description" content="QM Studios is a solo indie game studio from India, making Wandering Astronaut.">
-<meta name="theme-color" content="#04050c">
+<meta name="theme-color" content="#1a0f24">
 <meta property="og:type" content="website">
 <meta property="og:title" content="QM Studios">
 <meta property="og:description" content="A solo indie game studio from India, making Wandering Astronaut.">
@@ -14,169 +14,278 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=VT323&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-.hero{min-height:calc(100vh - 64px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:60px 0 80px}
-.hero .logo{width:min(220px,48vw);border-radius:50%;background:#EDE5D3;padding:14px;
-  box-shadow:0 0 0 2px var(--cyan),0 0 0 7px rgba(34,240,255,.12),0 0 50px rgba(34,240,255,.45),0 0 120px rgba(255,43,214,.25);
-  animation:float 6s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-10px)}}
-.hero h1{font-size:clamp(2.8rem,10vw,7rem);margin:36px 0 0}
-.hero .slogan{margin-top:14px;font-family:var(--hud);font-size:clamp(1.4rem,3vw,2rem);letter-spacing:6px;color:var(--magenta);text-shadow:var(--glow-m)}
-.hero .lead{margin:22px 0 30px}
-.scroll-hint{margin-top:56px;font-family:var(--hud);font-size:1.1rem;color:var(--dim);letter-spacing:3px}
+:root{
+  --void:#140b1c; --plum:#2a1638; --cream:#F3E9D6; --orange:#FF7A2F; --rust:#C2461A; --teal:#2EC4B6; --lilac:#B9A3FF;
+  --ink:#140b1c; --muted:#BFAFC9;
+  --display:'Syne',sans-serif; --serif:'Instrument Serif',serif; --mono:'Space Mono',monospace; --body:'Space Grotesk',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+.hero>div{min-width:0}
+body{margin:0;color:var(--cream);font-family:var(--body);line-height:1.6;overflow-x:hidden;
+  background:radial-gradient(120vmax 90vmax at 75% -10%,#3b1d4f 0%,var(--plum) 35%,var(--void) 75%) fixed,var(--void)}
+body::after{ /* film grain */
+  content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.13;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+#stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
+a{color:var(--orange)}
+a:hover{color:var(--cream)}
+img{max-width:100%}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+::selection{background:var(--orange);color:var(--ink)}
 
-.game{display:grid;grid-template-columns:1.3fr 1fr;color:var(--text)}
-.game:hover{text-shadow:none}
-.game .frame{border:none;min-height:320px}
-.game .body{padding:34px 32px;display:flex;flex-direction:column;gap:12px;justify-content:center}
-.game h3{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(1.8rem,3.4vw,2.6rem);line-height:1;text-transform:uppercase;letter-spacing:2px}
-.game .hud-line{font-family:var(--hud);font-size:1.25rem;color:var(--cyan)}
-.game:hover .hud::before,.game.hud:hover{box-shadow:0 0 40px rgba(34,240,255,.18)}
-@media (max-width:820px){.game{grid-template-columns:1fr}.game .frame{min-height:220px}}
+/* top bar */
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-family:var(--mono);font-size:.8rem;letter-spacing:2px;text-transform:uppercase}
+.top .id{display:flex;align-items:center;gap:12px;color:var(--cream);text-decoration:none}
+.top .id img{width:44px;height:44px;border-radius:50%;background:var(--cream);padding:3px}
+.top nav{display:flex;gap:22px}
+.top nav a{color:var(--muted);text-decoration:none}
+.top nav a:hover{color:var(--orange)}
+@media (max-width:640px){.top nav{gap:14px;font-size:.7rem}.top .id span{display:none}}
 
-.log{display:flex;flex-direction:column;gap:18px}
-.log .entry{display:grid;grid-template-columns:260px 1fr;gap:22px;padding:18px;color:var(--text);align-items:center}
-.log a.entry:hover{text-shadow:none;box-shadow:0 0 34px rgba(34,240,255,.16)}
-.log .entry.noimg{grid-template-columns:1fr}
-.log .frame{aspect-ratio:20/9}
-.log .stamp{font-family:var(--hud);font-size:1.2rem;color:var(--magenta);letter-spacing:1px}
-.log h3{margin:2px 0 6px;font-family:var(--display);font-weight:800;font-size:1.2rem;letter-spacing:1.5px;text-transform:uppercase}
-.log p{margin:0;color:#C9D0EE}
-.log .go{color:var(--cyan);font-weight:600}
-@media (max-width:700px){.log .entry{grid-template-columns:1fr}}
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:20px;min-height:calc(100vh - 90px);padding:20px 0 60px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(2.9rem,6.4vw,5.6rem);line-height:.85;margin:0;letter-spacing:-.03em;text-transform:uppercase}
+.hero h1 .o{color:var(--orange)}
+.hero .slogan{font-family:var(--serif);font-style:italic;font-size:clamp(1.8rem,4vw,3rem);color:var(--teal);margin:10px 0 0;line-height:1}
+.hero p.lead{font-size:clamp(1.05rem,1.8vw,1.25rem);max-width:520px;color:var(--muted);margin:26px 0 30px}
+.hero p.lead b{color:var(--cream);font-weight:600}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;font-family:var(--display);font-weight:700;font-size:1rem;
+  text-decoration:none;color:var(--ink);background:var(--orange);border:2px solid var(--orange);transition:transform .25s cubic-bezier(.3,1.6,.5,1),background .2s}
+.pill:hover{transform:rotate(-3deg) scale(1.05);color:var(--ink);background:var(--cream);border-color:var(--cream)}
+.pill.ghost{background:transparent;color:var(--cream);border-color:rgba(243,233,214,.5)}
+.pill.ghost:hover{background:var(--teal);border-color:var(--teal);color:var(--ink)}
+.pills{display:flex;flex-wrap:wrap;gap:14px}
 
-.about{display:grid;grid-template-columns:260px 1fr;gap:36px;align-items:center;padding:32px}
-.about .frame{aspect-ratio:1/1;border:1px solid var(--magenta);box-shadow:0 0 30px rgba(255,43,214,.35)}
-.about .hi{font-family:var(--display);font-weight:900;font-size:clamp(1.6rem,3vw,2.2rem);margin:0 0 10px;text-transform:uppercase;letter-spacing:2px}
-.about p{margin:0 0 14px;color:#C9D0EE;font-size:1.05rem}
-@media (max-width:720px){.about{grid-template-columns:1fr}.about .frame{max-width:260px}}
+/* the planet that watches you */
+.planet-wrap{position:relative;width:min(440px,80vw);aspect-ratio:1;justify-self:center;animation:bob 7s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-14px) rotate(2deg)}}
+.planet{position:absolute;inset:12%;border-radius:50%;z-index:2;overflow:hidden;
+  background:radial-gradient(circle at 32% 28%,#FFC08A 0%,var(--orange) 38%,var(--rust) 72%,#5a1c0a 100%);
+  box-shadow:0 0 80px rgba(255,122,47,.35),inset -30px -40px 80px rgba(40,10,30,.55)}
+.planet::before{content:"";position:absolute;inset:0;border-radius:50%;
+  background:repeating-linear-gradient(-18deg,transparent 0 22px,rgba(90,28,10,.22) 22px 34px,transparent 34px 60px);mix-blend-mode:multiply}
+.planet::after{content:"";position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle,rgba(20,11,28,.5) 1.4px,transparent 1.6px) 0 0/9px 9px;
+  -webkit-mask-image:linear-gradient(115deg,transparent 45%,#000 95%);mask-image:linear-gradient(115deg,transparent 45%,#000 95%)}
+.eye{position:absolute;left:50%;top:47%;width:34%;aspect-ratio:1.6;transform:translate(-50%,-50%);z-index:3;
+  background:var(--cream);border-radius:50% / 60%;box-shadow:inset 0 -8px 0 rgba(0,0,0,.12),0 0 0 5px #5a1c0a;overflow:hidden}
+.iris{position:absolute;left:50%;top:50%;width:52%;aspect-ratio:1;margin:-26% 0 0 -26%;border-radius:50%;
+  background:radial-gradient(circle,var(--ink) 0 30%,#0e6f67 32%,var(--teal) 62%,#0e6f67 100%);transition:transform .12s ease-out}
+.iris::after{content:"";position:absolute;width:22%;aspect-ratio:1;border-radius:50%;background:#fff;top:20%;left:58%}
+.lid{position:absolute;inset:0;background:#8a2c0e;transform:scaleY(0);transform-origin:top;z-index:2}
+.eye.blink .lid{animation:blink .22s ease-in-out}
+@keyframes blink{50%{transform:scaleY(1)}}
+.ring{position:absolute;inset:-6% -18%;transform:rotate(-16deg);pointer-events:none}
+.ring i{position:absolute;inset:38% 0;border-radius:50%;border:10px solid var(--teal);box-shadow:0 0 0 3px var(--cream),0 0 0 7px rgba(46,196,182,.35)}
+.ring.back{z-index:1}.ring.back i{clip-path:inset(0 0 50% 0)}
+.ring.front{z-index:4}.ring.front i{clip-path:inset(50% 0 0 0)}
+.moon{position:absolute;inset:-4%;z-index:5;animation:orbit 14s linear infinite}
+.moon b{position:absolute;top:0;left:50%;width:46px;height:46px;border-radius:50%;background:var(--lilac);
+  box-shadow:inset -8px -6px 0 rgba(20,11,28,.35)}
+@keyframes orbit{to{transform:rotate(360deg)}}
+.tag-float{position:absolute;right:-4%;bottom:6%;z-index:6;font-family:var(--mono);font-size:.72rem;letter-spacing:1px;
+  background:var(--cream);color:var(--ink);padding:6px 10px;transform:rotate(6deg);box-shadow:4px 4px 0 var(--ink)}
+@media (max-width:860px){.hero h1{font-size:clamp(2.2rem,11.5vw,5rem)}.hero{grid-template-columns:1fr;min-height:auto;padding-top:10px}.planet-wrap{order:-1;width:min(320px,78vw)}}
 
-.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-.contact a{padding:22px;color:var(--text);display:flex;flex-direction:column;gap:4px}
-.contact a:hover{text-shadow:none;box-shadow:0 0 30px rgba(34,240,255,.2)}
-.contact .k{font-family:var(--hud);font-size:1.15rem;color:var(--magenta);letter-spacing:2px}
-.contact .v{font-family:var(--display);font-weight:600;font-size:.95rem;letter-spacing:1px;word-break:break-word}
+/* ticker */
+.ticker{margin:30px -4vw 0;transform:rotate(-2.2deg);background:var(--orange);color:var(--ink);overflow:hidden;border-block:3px solid var(--ink);box-shadow:0 10px 0 rgba(0,0,0,.25)}
+.ticker div{display:flex;gap:40px;width:max-content;padding:12px 0;font-family:var(--display);font-weight:800;font-size:1.3rem;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;animation:tick 28s linear infinite}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* sections */
+.section{margin-top:130px}
+.eyebrow{font-family:var(--mono);font-size:.8rem;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin:0}
+.section h2{font-family:var(--display);font-weight:800;font-size:clamp(2.2rem,5.6vw,4.2rem);line-height:.95;letter-spacing:-.02em;margin:10px 0 36px;text-transform:uppercase}
+.section h2 em{font-family:var(--serif);font-weight:400;font-style:italic;text-transform:none;color:var(--orange);letter-spacing:0}
+
+/* the game: pulp paperback cover */
+.cover{display:grid;grid-template-columns:1fr 1fr;background:var(--cream);color:var(--ink);text-decoration:none;
+  border:3px solid var(--ink);box-shadow:14px 14px 0 var(--orange);transform:rotate(-1deg);transition:transform .35s cubic-bezier(.3,1.5,.5,1),box-shadow .35s}
+.cover:hover{transform:rotate(0) translate(-4px,-4px);box-shadow:20px 20px 0 var(--teal);color:var(--ink)}
+.cover .art{position:relative;min-height:380px;background:#000;overflow:hidden;border-right:3px solid var(--ink)}
+.cover .art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.2) contrast(1.05)}
+.cover .stamp{position:absolute;top:16px;left:16px;font-family:var(--mono);font-size:.75rem;letter-spacing:2px;background:var(--orange);color:var(--ink);padding:5px 10px;border:2px solid var(--ink)}
+.cover .txt{padding:34px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+.cover .no{font-family:var(--mono);font-size:.8rem;letter-spacing:2px;color:var(--rust)}
+.cover h3{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(2.2rem,4.6vw,3.6rem);line-height:.9;text-transform:uppercase;letter-spacing:-.02em}
+.cover .genre{font-family:var(--serif);font-style:italic;font-size:1.5rem;color:#5b4a63;line-height:1.1}
+.cover p{margin:0;font-size:1.05rem}
+.cover .go{font-family:var(--display);font-weight:700;color:var(--rust)}
+@media (max-width:780px){.cover{grid-template-columns:1fr}.cover .art{min-height:230px;border-right:0;border-bottom:3px solid var(--ink)}}
+
+/* field notes */
+.notes{display:grid;grid-template-columns:repeat(2,1fr);gap:34px 30px}
+.note{position:relative;display:block;background:#221330;border:2px solid rgba(243,233,214,.18);padding:18px;color:var(--cream);text-decoration:none;
+  transition:transform .3s cubic-bezier(.3,1.5,.5,1),border-color .3s}
+.note:nth-child(odd){transform:rotate(-1.2deg)}.note:nth-child(even){transform:rotate(1deg)}
+a.note:hover{transform:rotate(0) scale(1.02);border-color:var(--orange);color:var(--cream)}
+.note img{display:block;width:100%;aspect-ratio:20/9;object-fit:cover;margin-bottom:14px;border:2px solid var(--ink)}
+.note .date{font-family:var(--mono);font-size:.75rem;letter-spacing:2px;color:var(--teal)}
+.note h3{margin:4px 0 6px;font-family:var(--display);font-weight:700;font-size:1.45rem;line-height:1.1}
+.note p{margin:0;color:var(--muted)}
+.note .sticker{position:absolute;top:-14px;right:16px;font-family:var(--mono);font-size:.7rem;letter-spacing:1px;background:var(--teal);color:var(--ink);padding:4px 9px;transform:rotate(4deg);font-weight:700}
+.note .sticker.o{background:var(--orange)}.note .sticker.l{background:var(--lilac)}
+@media (max-width:760px){.notes{grid-template-columns:1fr}}
+
+/* specimen */
+.specimen{display:grid;grid-template-columns:320px 1fr;gap:56px;align-items:center}
+.polaroid{position:relative;background:var(--cream);padding:14px 14px 56px;transform:rotate(-4deg);box-shadow:10px 14px 0 rgba(0,0,0,.35);justify-self:center;width:min(320px,80vw)}
+.polaroid img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.polaroid figcaption{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-family:var(--serif);font-style:italic;font-size:1.4rem;color:var(--ink)}
+.polaroid::before{content:"";position:absolute;top:-14px;left:50%;width:110px;height:30px;margin-left:-55px;background:rgba(46,196,182,.75);transform:rotate(3deg)}
+.label-card{font-family:var(--mono);font-size:.8rem;letter-spacing:1px;display:inline-grid;grid-template-columns:auto auto;gap:4px 18px;border:2px dashed rgba(243,233,214,.35);padding:12px 16px;margin-bottom:22px;color:var(--muted)}
+.label-card b{color:var(--orange);font-weight:700}
+.specimen p{font-size:1.15rem;color:var(--muted);margin:0 0 18px;max-width:600px}
+.specimen p.big{font-family:var(--serif);font-size:clamp(1.8rem,3.4vw,2.6rem);line-height:1.1;color:var(--cream)}
+@media (max-width:780px){.specimen{grid-template-columns:1fr;gap:40px}}
+
+/* hail */
+.hail{display:flex;flex-wrap:wrap;gap:16px}
+.hail a{flex:1 1 240px;display:flex;flex-direction:column;gap:6px;padding:26px;border-radius:28px 6px 28px 6px;text-decoration:none;color:var(--ink);background:var(--cream);
+  border:3px solid var(--ink);box-shadow:6px 6px 0 var(--teal);transition:transform .3s cubic-bezier(.3,1.5,.5,1),box-shadow .3s}
+.hail a:nth-child(2){box-shadow:6px 6px 0 var(--orange)}
+.hail a:nth-child(3){box-shadow:6px 6px 0 var(--lilac)}
+.hail a:hover{transform:translate(-3px,-3px) rotate(-1.5deg);box-shadow:10px 10px 0 var(--orange);color:var(--ink)}
+.hail .k{font-family:var(--mono);font-size:.75rem;letter-spacing:2px;color:var(--rust)}
+.hail .v{font-family:var(--display);font-weight:700;font-size:1.2rem;word-break:break-word}
+
+footer{margin-top:140px;padding:40px 0 50px;border-top:2px solid rgba(243,233,214,.12)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.78rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .planet-wrap,.moon,.ticker div{animation:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
-<canvas id="stars" aria-hidden="true"></canvas>
+<canvas id="stars" aria-hidden="true" data-tints="243,233,214|243,233,214|255,175,120|150,230,220|200,185,255" data-density="3600" data-speed="0.8" data-sparkle="1"></canvas>
 
-<nav class="nav">
 <div class="wrap">
-<a class="brand" href="./"><span class="badge"><img src="assets/qm_logo.png" alt=""></span><b>QM STUDIOS</b></a>
-<ul>
-<li><a href="#games">GAMES</a></li>
-<li><a href="#log">LOG</a></li>
-<li><a href="#about">ABOUT</a></li>
-<li><a href="#contact">CONTACT</a></li>
-</ul>
+<header class="top">
+<a class="id" href="./"><img src="assets/qm_logo.png" alt="QM Studios logo"><span>QM Studios</span></a>
+<nav><a href="#games">Games</a><a href="#notes">Notes</a><a href="#specimen">Who</a><a href="#hail">Contact</a></nav>
+</header>
+
+<section class="hero">
+<div>
+<h1>QM<br><span class="o">Stu</span>dios</h1>
+<p class="slogan">playfully menacing.</p>
+<p class="lead">A <b>one-person game studio</b> from India, making strange stories set in lonely places. Something out there is watching. It's probably fine.</p>
+<div class="pills">
+<a class="pill" href="wandering-astronaut/">Wandering Astronaut ↗</a>
+<a class="pill ghost" href="https://instagram.com/qm_studios__">Follow the build</a>
 </div>
-</nav>
+</div>
+<div class="planet-wrap" aria-hidden="true">
+<div class="ring back"><i></i></div>
+<div class="planet"></div>
+<div class="eye" id="eye"><div class="iris" id="iris"></div><div class="lid"></div></div>
+<div class="ring front"><i></i></div>
+<div class="moon"><b></b></div>
+<span class="tag-float">SPECIMEN QM-01 · DO NOT FEED</span>
+</div>
+</section>
+</div>
+
+<div class="ticker" aria-hidden="true"><div>
+<span>Now transmitting ✦ Wandering Astronaut ✦ Made in India ✦ One human, many voices ✦ Playfully menacing ✦ Built in Godot ✦</span>
+<span>Now transmitting ✦ Wandering Astronaut ✦ Made in India ✦ One human, many voices ✦ Playfully menacing ✦ Built in Godot ✦</span>
+</div></div>
 
 <main class="wrap">
-<section class="hero">
-<img class="logo" src="assets/qm_logo.png" alt="QM Studios. Playfully menacing.">
-<h1 class="glitch" data-text="QM Studios">QM Studios</h1>
-<div class="slogan">PLAYFULLY MENACING</div>
-<p class="lead">A solo indie game studio from India, run by Aadesh Malani. Strange stories, lonely places, and the occasional skit about how badly it's all going.</p>
-<div class="btns">
-<a class="btn" href="wandering-astronaut/">Enter Wandering Astronaut ▸</a>
-<a class="btn m" href="https://instagram.com/qm_studios__">Follow the build</a>
-</div>
-<div class="scroll-hint caret">SCROLL TO DESCEND</div>
-</section>
-
 <section class="section reveal" id="games">
-<p class="kicker">NOW IN DEVELOPMENT</p>
-<h2>Current <span class="neon-c">mission</span></h2>
-<a class="game hud" href="wandering-astronaut/">
-<span class="hud-tag">PROJECT 01</span>
-<div class="frame"><img src="assets/opening_poster.jpg" alt="The research ship drifting in front of a purple nebula"></div>
-<div class="body">
-<h3 class="neon-c">Wandering Astronaut</h3>
-<span class="hud-line">FIRST-PERSON NARRATIVE MYSTERY · PC</span>
-<span>You wake up alone on a research ship built to be cheerful. The lights are out, and nobody is answering.</span>
-<span class="btn" style="align-self:flex-start;margin-top:8px">Board the ship ▸</span>
+<p class="eyebrow">Now in development</p>
+<h2>Project <em>No. 01</em></h2>
+<a class="cover" href="wandering-astronaut/">
+<div class="art"><img src="assets/opening_poster.jpg" alt="The research ship drifting in front of a purple nebula"><span class="stamp">PC · COMING SOON</span></div>
+<div class="txt">
+<span class="no">QM STUDIOS · VOL. 1</span>
+<h3>Wandering Astronaut</h3>
+<span class="genre">a first-person narrative mystery</span>
+<p>You wake up alone on a research ship built to be cheerful. The lights are out, and nobody is answering.</p>
+<span class="go">Board the ship →</span>
 </div>
 </a>
 </section>
 
-<section class="section reveal" id="log">
-<p class="kicker">TRANSMISSION LOG</p>
-<h2>Latest from the <span class="neon-m">studio</span></h2>
-<div class="log">
-<a class="entry hud" href="wandering-astronaut/#opening">
-<div class="frame"><img src="assets/opening_poster.jpg" alt="The ship drifting in front of a purple nebula, from the opening scene"></div>
-<div>
-<span class="stamp">[NOV 2026]</span>
+<section class="section reveal" id="notes">
+<p class="eyebrow">Field notes</p>
+<h2>Latest from <em>the studio</em></h2>
+<div class="notes">
+<a class="note" href="wandering-astronaut/#opening">
+<span class="sticker o">NEW</span>
+<img src="assets/opening_poster.jpg" alt="The ship drifting in front of a purple nebula, from the opening scene">
+<span class="date">NOV 2026</span>
 <h3>Watch the opening scene</h3>
-<p>The first minute of Chapter 1: Awakening, captured in-game. Sound on. <span class="go">Watch it ▸</span></p>
-</div>
+<p>The first minute of Chapter 1: Awakening, captured in-game. Sound on.</p>
 </a>
-<a class="entry hud" href="wandering-astronaut/#art-pass">
-<div class="frame"><img src="assets/ship_after.jpg" alt="The ship's exterior after the art pass, with panelled hull plating and a satellite dish"></div>
-<div>
-<span class="stamp">[NOV 2026]</span>
-<h3>The art pass has started</h3>
-<p>The ship went from grey boxes to a panelled, worn-in hull. Interiors are next. <span class="go">See the before and after ▸</span></p>
-</div>
+<a class="note" href="wandering-astronaut/#art-pass">
+<span class="sticker">ART PASS</span>
+<img src="assets/ship_after.jpg" alt="The ship's exterior after the art pass, with panelled hull plating and a satellite dish">
+<span class="date">NOV 2026</span>
+<h3>The ship got a glow-up</h3>
+<p>From grey boxes to a panelled, worn-in hull. Interiors are next.</p>
 </a>
-<div class="entry hud noimg">
-<div>
-<span class="stamp">[28 OCT 2026]</span>
+<div class="note">
+<span class="sticker l">IRL</span>
+<span class="date">28 OCT 2026</span>
 <h3>Playable at IGDC 2026, Chennai</h3>
-<p>Wandering Astronaut's Chapter 1 demo was played by attendees at the India Game Developer Conference. Their verdicts, in one word each, are <a href="https://instagram.com/qm_studios__">on Instagram</a>.</p>
+<p>Attendees at the India Game Developer Conference played the Chapter 1 demo. Their verdicts, in one word each, are <a href="https://instagram.com/qm_studios__">on Instagram</a>.</p>
 </div>
-</div>
-<div class="entry hud m noimg">
-<div>
-<span class="stamp">[INCOMING]</span>
+<div class="note">
+<span class="sticker o">SOON</span>
+<span class="date">INCOMING</span>
 <h3>Steam page</h3>
 <p>Wandering Astronaut is coming to Steam for PC. Chapter 1 will also be free on <a href="https://thequantummenece.itch.io">itch.io</a>.</p>
 </div>
 </div>
-</div>
 </section>
 
-<section class="section reveal" id="about">
-<p class="kicker">CREW MANIFEST: 1</p>
-<h2>Who's behind <span class="neon-c">QM Studios</span></h2>
-<div class="about hud m">
-<div class="frame"><img src="assets/aadesh.jpg" alt="Aadesh striking a playful pose on a mountain meadow, with Himalayan peaks behind him"></div>
+<section class="section reveal" id="specimen">
+<p class="eyebrow">Specimen report</p>
+<h2>Who's behind <em>QM Studios</em></h2>
+<div class="specimen">
+<figure class="polaroid" style="margin:0"><img src="assets/aadesh.jpg" alt="Aadesh striking a playful pose on a mountain meadow, with Himalayan peaks behind him"><figcaption>found in the wild</figcaption></figure>
 <div>
-<p class="hi">Hi, I'm <span class="neon-m">Aadesh</span>.</p>
+<div class="label-card"><span>NAME</span><b>Aadesh Malani</b><span>HABITAT</span><b>India</b><span>STUDIO SIZE</span><b>1 (one)</b><span>DIET</span><b>Bugs, mostly</b></div>
+<p class="big">Hi, I'm Aadesh.</p>
 <p>I make games on my own: the code, the design, the story, and every voice in them, from the astronaut to the ship's computer. QM Studios is my one-person studio from India. Expect games, devlogs, and the occasional skit about how badly some of that goes.</p>
-<a class="btn" href="https://thequantummenece.github.io/">Personal portfolio ▸</a>
+<a class="pill ghost" href="https://thequantummenece.github.io/">Personal portfolio ↗</a>
 </div>
 </div>
 </section>
 
-<section class="section reveal" id="contact">
-<p class="kicker">OPEN A CHANNEL</p>
-<h2><span class="neon-m">Contact</span></h2>
-<div class="contact">
-<a class="hud" href="mailto:aadeshmalani@gmail.com"><span class="k">EMAIL</span><span class="v">aadeshmalani@gmail.com</span></a>
-<a class="hud m" href="https://instagram.com/qm_studios__"><span class="k">INSTAGRAM</span><span class="v">@qm_studios__</span></a>
-<a class="hud" href="https://thequantummenece.itch.io"><span class="k">ITCH.IO</span><span class="v">thequantummenece</span></a>
+<section class="section reveal" id="hail">
+<p class="eyebrow">Open a frequency</p>
+<h2>Say <em>hello</em></h2>
+<div class="hail">
+<a href="mailto:aadeshmalani@gmail.com"><span class="k">EMAIL</span><span class="v">aadeshmalani@gmail.com</span></a>
+<a href="https://instagram.com/qm_studios__"><span class="k">INSTAGRAM</span><span class="v">@qm_studios__</span></a>
+<a href="https://thequantummenece.itch.io"><span class="k">ITCH.IO</span><span class="v">thequantummenece</span></a>
 </div>
 </section>
 </main>
 
-<footer class="footer">
-<div class="grid" aria-hidden="true"></div>
-<div class="wrap">
-<span>QM STUDIOS · PLAYFULLY MENACING</span>
-<span>MADE IN INDIA · BUILT IN GODOT</span>
-</div>
-</footer>
+<footer><div class="wrap"><span>QM Studios · Playfully menacing</span><span>Made in India ✦ Built in Godot</span></div></footer>
 
 <script src="assets/stars.js"></script>
 <script>
-(function(){var els=document.querySelectorAll('.reveal');
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var eye=document.getElementById('eye'),iris=document.getElementById('iris');
+function look(x,y){var r=eye.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,a=Math.atan2(y-cy,x-cx),
+  d=Math.min(1,Math.hypot(x-cx,y-cy)/300);iris.style.transform='translate('+(Math.cos(a)*r.width*.24*d)+'px,'+(Math.sin(a)*r.height*.2*d)+'px)'}
+addEventListener('pointermove',function(e){look(e.clientX,e.clientY)},{passive:true});
+if(!reduce){(function b(){setTimeout(function(){eye.classList.add('blink');setTimeout(function(){eye.classList.remove('blink');b()},240)},2500+Math.random()*4000)})();
+  if(!matchMedia('(pointer:fine)').matches){var t=0;setInterval(function(){t+=.03;var r=eye.getBoundingClientRect();look(r.left+r.width/2+Math.cos(t)*300,r.top+r.height/2+Math.sin(t*1.3)*200)},60)}}
+var els=document.querySelectorAll('.reveal');
 if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
 els.forEach(function(e){io.observe(e)})})();
 </script>
 </body>

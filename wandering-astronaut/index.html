@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wandering Astronaut · QM Studios</title>
 <meta name="description" content="A first-person narrative mystery. You wake up alone on a research ship built to be cheerful. The lights are out, and nobody is answering.">
-<meta name="theme-color" content="#04050c">
+<meta name="theme-color" content="#050505">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Wandering Astronaut · QM Studios">
 <meta property="og:description" content="You wake up alone on a research ship built to be cheerful. The lights are out, and nobody is answering.">
@@ -15,204 +15,238 @@
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=VT323&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center;padding:70px 0 40px}
-.hero h1{font-size:clamp(2.6rem,7.6vw,5.6rem);margin:12px 0 0}
-.hero .sub{margin-top:16px;font-family:var(--hud);font-size:clamp(1.25rem,2.4vw,1.6rem);color:var(--magenta);text-shadow:var(--glow-m);letter-spacing:1px}
-.hero .lead{margin:20px 0 28px}
-.readout{padding:26px 24px 22px;font-family:var(--hud);font-size:1.45rem;line-height:1.5;color:#7CFFB2;text-shadow:0 0 8px rgba(124,255,178,.55)}
-.readout .warn{color:var(--red);text-shadow:0 0 8px rgba(255,59,92,.7)}
-.readout .row{white-space:nowrap;overflow:hidden}
-.readout .line{opacity:0}
-.readout.on .line{animation:type .01s forwards}
-@keyframes type{to{opacity:1}}
-.pulse{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);margin-right:10px;animation:pulse 1.2s infinite}
-@keyframes pulse{50%{opacity:.25}}
-@media (max-width:860px){.hero{grid-template-columns:1fr;padding-top:48px}}
+:root{
+  --black:#050505; --hull:#0d0d0e; --line:rgba(237,229,211,.12); --cream:#EDE5D3; --muted:#9a948a; --dim:#5f5a53;
+  --amber:#FFB547; --red:#E23B3B; --green:#8EE6A8;
+  --title:'Barlow Condensed',sans-serif; --mono:'IBM Plex Mono',monospace; --body:'IBM Plex Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--black);color:var(--cream);font-family:var(--body);font-weight:300;line-height:1.7;overflow-x:hidden}
+body::before{ /* emergency light washing in from the top */
+  content:"";position:fixed;left:0;right:0;top:-30vh;height:70vh;z-index:-1;pointer-events:none;
+  background:radial-gradient(60% 60% at 50% 0,rgba(226,59,59,.28),transparent 70%);animation:alarm 4s ease-in-out infinite}
+@keyframes alarm{50%{opacity:.35}}
+body::after{ /* vignette */
+  content:"";position:fixed;inset:0;z-index:40;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.65) 100%)}
+#stars{position:fixed;inset:0;z-index:-2;pointer-events:none}
+a{color:var(--amber);text-decoration:none}
+a:hover{color:var(--cream)}
+img,video{max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
-.screen{padding:10px}
-.screen video{display:block;width:100%;height:auto;aspect-ratio:1280/690;background:#000}
-.screen .vcap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 18px;padding:12px 6px 4px;font-family:var(--hud);font-size:1.15rem;color:var(--muted)}
-.screen .vcap b{color:var(--cyan);font-weight:400}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-family:var(--mono);font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--line)}
+.bar a{color:var(--muted)}
+.bar a:hover{color:var(--amber)}
+.bar .rec{color:var(--red)}
+.bar .rec::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin-right:8px;box-shadow:0 0 8px var(--red);animation:alarm 1.2s infinite}
+.bar nav{display:flex;gap:22px}
+@media (max-width:640px){.bar nav{display:none}}
 
-.premise{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.premise p{font-size:1.15rem;color:#C9D0EE;margin:0}
-.premise b{color:#fff;text-shadow:var(--glow-m)}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.pair .frame{aspect-ratio:1/1}
-@media (max-width:820px){.premise{grid-template-columns:1fr}}
+/* hero */
+.hero{min-height:calc(100vh - 70px);display:flex;flex-direction:column;justify-content:center;padding:60px 0;text-align:center;align-items:center}
+.hero .pre{font-family:var(--mono);font-size:.78rem;letter-spacing:4px;color:var(--dim);text-transform:uppercase}
+.hero h1{font-family:var(--title);font-weight:300;font-size:clamp(2.8rem,9.5vw,7.4rem);line-height:.95;letter-spacing:.14em;text-transform:uppercase;margin:18px 0 0;
+  text-shadow:0 0 40px rgba(237,229,211,.15)}
+.hero h1 b{font-weight:700;display:block;letter-spacing:.2em}
+.hero .sub{margin-top:18px;font-family:var(--mono);font-size:.9rem;letter-spacing:3px;color:var(--amber);text-transform:uppercase}
+.hero .hook{max-width:620px;margin:28px auto 0;font-size:clamp(1.15rem,2.2vw,1.45rem);color:var(--cream);line-height:1.5}
+.term{margin:44px auto 0;width:min(460px,100%);text-align:left;font-family:var(--mono);font-size:.95rem;line-height:1.9;color:var(--green);
+  border:1px solid rgba(142,230,168,.25);background:rgba(5,12,8,.6);padding:18px 22px;text-shadow:0 0 6px rgba(142,230,168,.4)}
+.term .w{color:var(--red);text-shadow:0 0 6px rgba(226,59,59,.5)}
+.term .l{display:block;opacity:0}
+.term.on .l{animation:show .01s forwards}
+@keyframes show{to{opacity:1}}
+.term .cur::after{content:"█";animation:alarm 1s steps(1) infinite;margin-left:4px}
+.btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:40px}
+.btn{display:inline-block;padding:13px 26px;font-family:var(--mono);font-size:.8rem;letter-spacing:3px;text-transform:uppercase;color:var(--cream);border:1px solid rgba(237,229,211,.4);transition:all .25s}
+.btn:hover{background:var(--cream);color:var(--black);border-color:var(--cream)}
+.btn.a{border-color:var(--amber);color:var(--amber)}
+.btn.a:hover{background:var(--amber);color:var(--black)}
 
-.ba{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.ba .frame,.detail{aspect-ratio:20/9}
-.ba .lab{position:absolute;top:12px;left:12px;padding:4px 14px;font-family:var(--display);font-weight:800;font-size:.85rem;letter-spacing:2px;background:rgba(4,5,12,.85);color:var(--muted);border:1px solid var(--dim)}
-.ba .after .lab{color:#02040a;background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 18px rgba(34,240,255,.7)}
-.ba .after{border-color:var(--cyan);box-shadow:0 0 26px rgba(34,240,255,.25)}
-.detail{margin-top:18px}
+/* sections */
+.sec{margin-top:140px}
+.sec-h{display:flex;align-items:baseline;gap:18px;border-top:1px solid var(--line);padding-top:16px;margin-bottom:34px}
+.sec-h .n{font-family:var(--mono);font-size:.8rem;color:var(--red);letter-spacing:2px}
+.sec-h h2{margin:0;font-family:var(--title);font-weight:500;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:.12em;text-transform:uppercase;line-height:1}
+.sec-h .meta{margin-left:auto;font-family:var(--mono);font-size:.72rem;letter-spacing:2px;color:var(--dim);text-transform:uppercase}
+@media (max-width:640px){.sec-h .meta{display:none}}
+
+.player{border:1px solid var(--line);background:#000;padding:0}
+.player video{display:block;width:100%;height:auto;aspect-ratio:1280/690;background:#000}
+.player figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 18px;padding:12px 16px;font-family:var(--mono);font-size:.75rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;border-top:1px solid var(--line)}
+.player figcaption b{color:var(--amber);font-weight:500}
+
+.brief{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.brief p{font-size:1.2rem;margin:0;color:#d8d1c2}
+.brief p b{font-weight:500;color:var(--amber)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:800px){.brief{grid-template-columns:1fr}}
+
+.shot{position:relative;margin:0;overflow:hidden;border:1px solid var(--line);background:#000}
+.shot img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
+.shot:hover img{transform:scale(1.03)}
+.shot figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 8px;font-family:var(--mono);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--cream);
+  background:linear-gradient(transparent,rgba(0,0,0,.85))}
+.pair .shot{aspect-ratio:1}
+
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ba .shot,.detail{aspect-ratio:20/9}
+.ba .tag{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:.72rem;letter-spacing:3px;padding:4px 10px;background:rgba(0,0,0,.75);color:var(--muted);border:1px solid var(--dim)}
+.ba .after .tag{color:var(--black);background:var(--amber);border-color:var(--amber)}
+.detail{margin-top:12px}
 @media (max-width:700px){.ba{grid-template-columns:1fr}}
 
-.shots{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.shots .frame{aspect-ratio:16/9}
-@media (max-width:640px){.shots{grid-template-columns:1fr}}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.gallery .shot{aspect-ratio:16/9}
+@media (max-width:640px){.gallery{grid-template-columns:1fr}}
+.note{font-family:var(--mono);font-size:.72rem;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-top:12px}
 
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
-.feature{padding:24px 22px}
-.feature .n{font-family:var(--display);font-weight:900;font-size:1.9rem;color:transparent;-webkit-text-stroke:1px var(--cyan);text-shadow:0 0 18px rgba(34,240,255,.35)}
-.feature.m .n{-webkit-text-stroke-color:var(--magenta);text-shadow:0 0 18px rgba(255,43,214,.35)}
-.feature h3{margin:8px 0 6px;font-family:var(--display);font-weight:800;font-size:1rem;letter-spacing:1.5px;text-transform:uppercase}
-.feature p{margin:0;color:#C9D0EE;font-size:.98rem}
+.sys{list-style:none;margin:0;padding:0;font-family:var(--mono);border-top:1px solid var(--line)}
+.sys li{display:grid;grid-template-columns:70px 1fr auto;gap:18px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line)}
+.sys .i{color:var(--dim);font-size:.8rem}
+.sys .t{font-family:var(--body);font-size:1.1rem;color:var(--cream)}
+.sys .t small{display:block;font-size:.95rem;color:var(--muted)}
+.sys .s{font-size:.72rem;letter-spacing:2px;color:var(--green)}
+@media (max-width:600px){.sys li{grid-template-columns:40px 1fr}.sys .s{display:none}}
 
-.timeline{list-style:none;margin:0;padding:0 0 0 26px;border-left:2px solid var(--line);display:flex;flex-direction:column;gap:22px}
-.timeline li{position:relative}
-.timeline li::before{content:"";position:absolute;left:-33px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--cyan);box-shadow:0 0 10px var(--cyan)}
-.timeline li.done::before{background:var(--cyan)}
-.timeline li.next::before{border-color:var(--magenta);box-shadow:0 0 10px var(--magenta)}
-.timeline .t{font-family:var(--hud);font-size:1.2rem;color:var(--cyan);letter-spacing:1px}
-.timeline li.next .t{color:var(--magenta)}
-.timeline p{margin:2px 0 0;color:#C9D0EE}
+.log{font-family:var(--mono);font-size:.92rem;border-left:1px solid var(--line);margin-left:6px}
+.log div{position:relative;padding:0 0 26px 28px}
+.log div::before{content:"";position:absolute;left:-5px;top:7px;width:9px;height:9px;background:var(--dim)}
+.log div.ok::before{background:var(--green);box-shadow:0 0 8px var(--green)}
+.log div.now::before{background:var(--amber);box-shadow:0 0 10px var(--amber);animation:alarm 1.4s infinite}
+.log div.next::before{background:transparent;border:1px solid var(--red)}
+.log time{display:block;font-size:.75rem;letter-spacing:2px;color:var(--muted)}
+.log p{margin:2px 0 0;font-family:var(--body);font-size:1.05rem;color:#d8d1c2}
 
-.cta{padding:40px 32px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
-.cta h2{margin:0}
-.cta .btns{justify-content:center}
-.quote{font-family:var(--display);font-weight:600;font-size:clamp(1.1rem,2.4vw,1.5rem);letter-spacing:1px;color:#fff}
+.end{text-align:center;padding:90px 0 40px}
+.end .pre{font-family:var(--mono);font-size:.78rem;letter-spacing:4px;color:var(--red)}
+.end p.q{font-family:var(--title);font-weight:300;font-size:clamp(1.6rem,4vw,2.6rem);letter-spacing:.1em;text-transform:uppercase;margin:16px 0 8px}
+.end p.s{color:var(--muted);margin:0}
+
+footer{border-top:1px solid var(--line);margin-top:60px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:26px 24px;font-family:var(--mono);font-size:.72rem;letter-spacing:2px;color:var(--dim);text-transform:uppercase}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 1.1s ease,transform 1.1s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){body::before,.bar .rec::before,.log div.now::before{animation:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<canvas id="stars" aria-hidden="true"></canvas>
+<canvas id="stars" aria-hidden="true" data-tints="237,229,211|255,255,255" data-density="5200" data-speed="0.35"></canvas>
 
-<nav class="nav">
 <div class="wrap">
-<a class="brand" href="../"><span class="badge"><img src="../assets/qm_logo.png" alt=""></span><b>QM STUDIOS</b></a>
-<ul>
-<li><a href="#opening">WATCH</a></li>
-<li><a href="#premise">STORY</a></li>
-<li><a href="#art-pass">ART</a></li>
-<li><a href="#plan">PLAN</a></li>
-</ul>
-</div>
-</nav>
+<header class="bar">
+<a href="../">← QM Studios</a>
+<nav><a href="#opening">Watch</a><a href="#briefing">Briefing</a><a href="#art-pass">Art pass</a><a href="#log">Log</a></nav>
+<span class="rec">FGRYYNE · DECK 1</span>
+</header>
 
-<main class="wrap">
 <section class="hero">
-<div>
-<p class="kicker">QM STUDIOS PRESENTS</p>
-<h1 class="glitch" data-text="Wandering Astronaut">Wandering Astronaut</h1>
+<span class="pre">QM Studios presents</span>
+<h1>Wandering <b>Astronaut</b></h1>
 <div class="sub">A first-person narrative mystery · Chapter 1: Awakening</div>
-<p class="lead">You wake up alone on a research ship built to be cheerful. The lights are out, and nobody is answering.</p>
+<p class="hook">You wake up alone on a research ship built to be cheerful. The lights are out, and nobody is answering.</p>
+<div class="term" id="term" role="img" aria-label="Ship status: system restart, main power offline, fuel 0%, crew status unknown, 1 unplayed message">
+<span class="l" style="animation-delay:.5s">&gt; SYSTEM RESTART</span>
+<span class="l w" style="animation-delay:1.3s">&gt; MAIN POWER: OFFLINE</span>
+<span class="l w" style="animation-delay:2.1s">&gt; FUEL: 0%</span>
+<span class="l" style="animation-delay:2.9s">&gt; CREW STATUS: UNKNOWN</span>
+<span class="l cur" style="animation-delay:3.7s">&gt; MESSAGES: 1 UNPLAYED</span>
+</div>
 <div class="btns">
-<a class="btn" href="#opening">▶ Watch the opening</a>
-<a class="btn m" href="https://instagram.com/qm_studios__">Follow the build</a>
-</div>
-</div>
-<div class="readout hud m" id="readout" aria-label="Ship status: system restart, main power offline, fuel 0%, crew status unknown">
-<span class="hud-tag">FGRYYNE · SHIP STATUS</span>
-<div class="row line" style="animation-delay:.3s"><span class="pulse"></span>SYSTEM RESTART</div>
-<div class="row line warn" style="animation-delay:1.1s">MAIN POWER: OFFLINE</div>
-<div class="row line warn" style="animation-delay:1.9s">FUEL: 0%</div>
-<div class="row line" style="animation-delay:2.7s">CREW STATUS: UNKNOWN</div>
-<div class="row line caret" style="animation-delay:3.5s">MESSAGES: 1 UNPLAYED</div>
+<a class="btn a" href="#opening">▶ Play message</a>
+<a class="btn" href="https://instagram.com/qm_studios__">Follow the build</a>
 </div>
 </section>
 
-<section class="section reveal" id="opening" style="margin-top:48px">
-<p class="kicker">INCOMING TRANSMISSION</p>
-<h2>The <span class="neon-c">opening</span> of Chapter 1</h2>
-<figure class="screen hud" style="margin:0">
+<section class="sec reveal" id="opening">
+<div class="sec-h"><span class="n">01</span><h2>The opening</h2><span class="meta">Playback · captured in-game</span></div>
+<figure class="player">
 <video controls playsinline preload="metadata" poster="../assets/opening_poster.jpg">
 <source src="../media/opening_scene.mp4" type="video/mp4">
 Your browser can't play this video. <a href="../media/opening_scene.mp4">Download the opening scene</a>.
 </video>
-<figcaption class="vcap"><span><b>REC</b> · CAPTURED IN-GAME · SOUND ON</span><span>ART PASS IN PROGRESS</span></figcaption>
+<figcaption><span><b>Message 001</b> · Chapter 1: Awakening · sound on</span><span>Art pass in progress</span></figcaption>
 </figure>
 </section>
 
-<section class="section reveal" id="premise">
-<p class="kicker">MISSION BRIEFING</p>
-<h2>The <span class="neon-m">premise</span></h2>
-<div class="premise">
+<section class="sec reveal" id="briefing">
+<div class="sec-h"><span class="n">02</span><h2>Briefing</h2><span class="meta">Crew status: unknown</span></div>
+<div class="brief">
 <p>An astronaut wakes in the medbay of FGRYYNE, a research vessel drifting through deep space, with no memory of how he got there. The crew is gone, the power is failing and the fuel is running low. To survive he has to keep the ship alive. To understand it, he has to answer one question: <b>who were these people?</b></p>
 <div class="pair">
-<div class="frame"><img src="../assets/shot_past.jpg" alt="A bright cream console room with orange and teal trim"><span class="cap">Built to feel like home</span></div>
-<div class="frame"><img src="../assets/shot_present.jpg" alt="The same room fading into emergency red light"><span class="cap">Until the lights died</span></div>
+<figure class="shot"><img src="../assets/shot_past.jpg" alt="A bright cream console room with orange and teal trim"><figcaption>Built to feel like home</figcaption></figure>
+<figure class="shot"><img src="../assets/shot_present.jpg" alt="The same room fading into emergency red light"><figcaption>Until the lights died</figcaption></figure>
 </div>
 </div>
 </section>
 
-<section class="section reveal" id="art-pass">
-<p class="kicker">ART PASS IN PROGRESS · NOV 2026</p>
-<h2>The ship gets its <span class="neon-c">look</span></h2>
-<p class="lead muted" style="margin:-8px 0 24px">Here's the exterior before and after. Interiors are next.</p>
+<section class="sec reveal" id="art-pass">
+<div class="sec-h"><span class="n">03</span><h2>Art pass</h2><span class="meta">In progress · Nov 2026</span></div>
+<p style="margin:-10px 0 24px;color:var(--muted);font-size:1.1rem">The ship is getting its proper look. Here's the exterior before and after. Interiors are next.</p>
 <div class="ba">
-<div class="frame"><img src="../assets/ship_before.jpg" alt="The ship's exterior before the art pass: plain grey and white blocks"><span class="lab">BEFORE</span></div>
-<div class="frame after"><img src="../assets/ship_after.jpg" alt="The ship's exterior after the art pass: panelled, weathered hull plating"><span class="lab">AFTER</span></div>
+<figure class="shot"><img src="../assets/ship_before.jpg" alt="The ship's exterior before the art pass: plain grey and white blocks"><span class="tag">Before</span></figure>
+<figure class="shot after"><img src="../assets/ship_after.jpg" alt="The ship's exterior after the art pass: panelled, weathered hull plating"><span class="tag">After</span></figure>
 </div>
-<div class="frame detail"><img src="../assets/ship_after_detail.jpg" alt="Close-up of the new hull detail and the satellite dish on top of the ship"><span class="cap">Hull detail · after</span></div>
+<figure class="shot detail"><img src="../assets/ship_after_detail.jpg" alt="Close-up of the new hull detail and the satellite dish on top of the ship"><figcaption>Hull detail · after</figcaption></figure>
 </section>
 
-<section class="section reveal" id="shots">
-<p class="kicker">SHIP LOGS · VISUAL</p>
-<h2>From the <span class="neon-m">ship</span></h2>
-<div class="shots">
-<div class="frame"><img src="../assets/shot_menu.jpg" alt="Main menu with the ship drifting through space"><span class="cap">Main menu</span></div>
-<div class="frame"><img src="../assets/shot_flashlight.jpg" alt="A flashlight beam in a dark corridor during a power failure"><span class="cap">Power failure</span></div>
-<div class="frame"><img src="../assets/shot_power.jpg" alt="The astronaut at a console as the ship's power comes back"><span class="cap">Power restored</span></div>
-<div class="frame"><img src="../assets/shot_corridor.jpg" alt="A red-lit corridor aboard the ship, with doors marked Storage and Cockpit"><span class="cap">Emergency lighting</span></div>
+<section class="sec reveal" id="shots">
+<div class="sec-h"><span class="n">04</span><h2>From the ship</h2><span class="meta">Visual records</span></div>
+<div class="gallery">
+<figure class="shot"><img src="../assets/shot_menu.jpg" alt="Main menu with the ship drifting through space"><figcaption>Main menu</figcaption></figure>
+<figure class="shot"><img src="../assets/shot_flashlight.jpg" alt="A flashlight beam in a dark corridor during a power failure"><figcaption>Power failure</figcaption></figure>
+<figure class="shot"><img src="../assets/shot_power.jpg" alt="The astronaut at a console as the ship's power comes back"><figcaption>Power restored</figcaption></figure>
+<figure class="shot"><img src="../assets/shot_corridor.jpg" alt="A red-lit corridor aboard the ship, with doors marked Storage and Cockpit"><figcaption>Emergency lighting</figcaption></figure>
 </div>
-<p class="muted" style="font-family:var(--hud);font-size:1.1rem;margin-top:12px">Screenshots: alpha build, before the art pass.</p>
+<p class="note">Screenshots: alpha build, before the art pass</p>
 </section>
 
-<section class="section reveal" id="features">
-<p class="kicker">SYSTEMS</p>
-<h2>Key <span class="neon-c">features</span></h2>
-<div class="features">
-<div class="feature hud"><span class="n">01</span><h3>A mystery told by the ship</h3><p>Uncover what happened through logs, objects and empty rooms.</p></div>
-<div class="feature hud m"><span class="n">02</span><h3>Tractor-beam mining</h3><p>Pull in asteroids to keep the ship fuelled and moving.</p></div>
-<div class="feature hud"><span class="n">03</span><h3>Ship hazards</h3><p>Survive failures like a hull breach in total darkness.</p></div>
-<div class="feature hud m"><span class="n">04</span><h3>Dread, not jump scares</h3><p>Slow, suspenseful exploration: horror built on contrast.</p></div>
-<div class="feature hud"><span class="n">05</span><h3>Fully voiced</h3><p>Every voice, from the astronaut to the ship's computer, performed by the developer.</p></div>
+<section class="sec reveal" id="systems">
+<div class="sec-h"><span class="n">05</span><h2>Systems</h2><span class="meta">Diagnostic</span></div>
+<ul class="sys">
+<li><span class="i">SYS-01</span><span class="t">A mystery told by the ship<small>Uncover what happened through logs, objects and empty rooms.</small></span><span class="s">ONLINE</span></li>
+<li><span class="i">SYS-02</span><span class="t">Tractor-beam mining<small>Pull in asteroids to keep the ship fuelled and moving.</small></span><span class="s">ONLINE</span></li>
+<li><span class="i">SYS-03</span><span class="t">Ship hazards<small>Survive failures like a hull breach in total darkness.</small></span><span class="s">ONLINE</span></li>
+<li><span class="i">SYS-04</span><span class="t">Dread, not jump scares<small>Slow, suspenseful exploration: horror built on contrast.</small></span><span class="s">ONLINE</span></li>
+<li><span class="i">SYS-05</span><span class="t">Fully voiced<small>Every voice, from the astronaut to the ship's computer, performed by the developer.</small></span><span class="s">ONLINE</span></li>
+</ul>
+</section>
+
+<section class="sec reveal" id="log">
+<div class="sec-h"><span class="n">06</span><h2>Mission log</h2><span class="meta">Development</span></div>
+<div class="log">
+<div class="ok"><time>OCT 2026</time><p>Chapter 1 playable end to end, after two alpha test rounds. Testers' first read: "like Project Hail Mary".</p></div>
+<div class="ok"><time>28 OCT 2026</time><p>Demoed at IGDC 2026, Chennai.</p></div>
+<div class="now"><time>NOV 2026 · NOW</time><p>Art pass underway: exterior done, interiors next.</p></div>
+<div class="next"><time>COMING SOON</time><p>Steam store page for the full game (PC), and Chapter 1: Awakening free on itch.io.</p></div>
 </div>
 </section>
 
-<section class="section reveal" id="plan">
-<p class="kicker">FLIGHT PLAN</p>
-<h2>Where we're <span class="neon-m">headed</span></h2>
-<ol class="timeline">
-<li class="done"><span class="t">OCT 2026</span><p>Chapter 1 playable end to end, after two alpha test rounds. Testers' first read: "like Project Hail Mary".</p></li>
-<li class="done"><span class="t">28 OCT 2026</span><p>Demoed at IGDC 2026, Chennai.</p></li>
-<li><span class="t">NOV 2026 · NOW</span><p>Art pass underway: exterior done, interiors next.</p></li>
-<li class="next"><span class="t">COMING SOON</span><p>Steam store page for the full game (PC), and Chapter 1: Awakening free on itch.io.</p></li>
-</ol>
-</section>
-
-<section class="section reveal">
-<div class="cta hud m">
-<p class="kicker">END OF TRANSMISSION</p>
-<p class="quote">Built solo in Godot by Aadesh Malani · QM Studios, India</p>
+<section class="end reveal">
+<div class="pre">— End of transmission —</div>
+<p class="q">Nobody is answering. Yet.</p>
+<p class="s">Built solo in Godot by Aadesh Malani · QM Studios, India</p>
 <div class="btns">
-<a class="btn m" href="https://instagram.com/qm_studios__">Instagram @qm_studios__</a>
+<a class="btn a" href="https://instagram.com/qm_studios__">Instagram @qm_studios__</a>
 <a class="btn" href="mailto:aadeshmalani@gmail.com">Email the studio</a>
 <a class="btn" href="https://thequantummenece.itch.io">itch.io</a>
 </div>
-</div>
 </section>
-</main>
-
-<footer class="footer">
-<div class="grid" aria-hidden="true"></div>
-<div class="wrap">
-<span>WANDERING ASTRONAUT · <a href="../">QM STUDIOS</a></span>
-<span>NOBODY IS ANSWERING</span>
 </div>
-</footer>
+
+<footer><div class="wrap"><span>Wandering Astronaut · <a href="../">QM Studios</a></span><span>© 2026 QM Studios</span></div></footer>
 
 <script src="../assets/stars.js"></script>
 <script>
 (function(){
-var r=document.getElementById('readout');setTimeout(function(){r.classList.add('on')},200);
+setTimeout(function(){document.getElementById('term').classList.add('on')},300);
 var els=document.querySelectorAll('.reveal');
 if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08});
 els.forEach(function(e){io.observe(e)})})();
 </script>
 </body>
